@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>Formulario de Registro</h2>
+            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre:</label>
+                    <input type="text" class="form-control" id="nombre" formControlName="nombre" required>
+                </div>
+                <div class="mb-3">
+                    <label for="nombreUsuario" class="form-label">Nombre de Usuario:</label>
+                    <input type="text" class="form-control" id="nombreUsuario" formControlName="nombreUsuario" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo Electrónico:</label>
+                    <input type="email" class="form-control" id="email" formControlName="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña:</label>
+                    <input type="password" class="form-control" id="password" formControlName="password" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Roles:</label>
+                    <div class="form-check" *ngFor="let rol of [1, 2]">
+                        <input type="checkbox" class="form-check-input" id="rol{{ rol }}"
+                            [checked]="formulario.get('roles').value.includes(rol)" (change)="agregarRol(rol)">
+                        <label class="form-check-label" for="rol{{ rol }}">Rol {{ rol }}</label>
+                    </div>
+                </div>
+                <button class="mb-3" type="submit" class="btn btn-primary">Registrar</button>
+                <div class="mb-3" *ngIf="mostrarAlerta" class="alert alert-success" role="alert">
+                    Usuario registrado con éxito.
+                </div>
+            </form>
+            <hr>
+            <p>¿Ya tienes una cuenta? <button class="btn btn-link" (click)="goToLogin()">Inicia Sesión</button></p>
+        </div>
+    </div>
+</div>

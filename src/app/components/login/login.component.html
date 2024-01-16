@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>Iniciar Sesión</h2>
+            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                    <label for="nombreUsuario" class="form-label">Nombre de Usuario:</label>
+                    <input type="text" class="form-control" id="nombreUsuario" formControlName="nombreUsuario" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña:</label>
+                    <input type="password" class="form-control" id="password" formControlName="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Iniciar Sesión</button>
+            </form>
+            <hr>
+            <p>¿No tienes una cuenta? <button class="btn btn-link" (click)="goToRegister()">Regístrate</button></p>
+        </div>
+    </div>
+</div>
