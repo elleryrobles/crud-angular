@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
@@ -10,11 +10,12 @@ import { UserService } from '../../services/user.service';
 })
 export class LoginComponent {
 
+  router = inject(Router);
+  userService = inject(UserService);
+
   formulario: FormGroup;
 
-  constructor(
-    private router: Router,
-    private userService: UserService) {
+  constructor() {
     this.formulario = new FormGroup({
       nombreUsuario: new FormControl(),
       password: new FormControl(),

@@ -3,12 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { UserListComponent } from './components/user-list/user-list.component';
-import { TokenGuard } from './guards/token.guard';
+import { tokenGuard } from './guards/token.guard';
 
 const routes: Routes = [
   { path: 'registro', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'user-list', component: UserListComponent, canActivate: [TokenGuard] },
+  { path: 'user-list', component: UserListComponent, canActivate: [tokenGuard] },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 

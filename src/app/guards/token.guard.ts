@@ -1,21 +1,14 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { Injectable, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class TokenGuard implements CanActivate {
-  constructor(private router: Router) {}
+export const tokenGuard = () => {
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): boolean {
+  const router = inject(Router);
+
     if (localStorage.getItem('token_crud')) {
       return true;
     } else {
-      this.router.navigate(['/login']);
+      router.navigate(['/login']);
       return false;
     }
   }
-}

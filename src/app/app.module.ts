@@ -7,9 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { UserService } from './services/user.service';
 import { UserListComponent } from './components/user-list/user-list.component';
-import { TokenGuard } from './guards/token.guard';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
@@ -25,7 +23,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [UserService, TokenGuard, {
+  providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true

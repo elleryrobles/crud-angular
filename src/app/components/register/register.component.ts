@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
@@ -10,12 +10,13 @@ import { UserService } from '../../services/user.service';
 })
 export class RegisterComponent {
 
+  router = inject(Router);
+  userService = inject(UserService);
+
   mostrarAlerta: boolean = false;
   formulario: FormGroup;
 
   constructor(
-    private router: Router,
-    private userService: UserService,
     private fb: FormBuilder
   ) {
     this.formulario = new FormGroup({

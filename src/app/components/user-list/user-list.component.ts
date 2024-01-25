@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 
@@ -9,13 +9,13 @@ import { Router } from '@angular/router';
 })
 export class UserListComponent {
 
+  router = inject(Router);
+  userService = inject(UserService);
+
   users: any[] = [];
   pageSize = 5; // ajusta el tamaño de la página según tus necesidades
   currentPage = 1;
   totalPages= 10;
-
-  constructor(private userService: UserService,
-    private router: Router) {}
 
   ngOnInit(): void {
     this.loadUsers();
