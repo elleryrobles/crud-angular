@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css']
+  styleUrl: './user-list.component.css'
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent {
 
   users: any[] = [];
   pageSize = 5; // ajusta el tamaño de la página según tus necesidades
   currentPage = 1;
-  totalPages: number;
+  totalPages= 10;
 
   constructor(private userService: UserService,
     private router: Router) {}
@@ -43,5 +43,5 @@ export class UserListComponent implements OnInit {
     localStorage.removeItem('token_crud');
     this.router.navigate(['/login']);
   }
-
+  
 }
