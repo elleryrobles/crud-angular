@@ -2,16 +2,24 @@
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <h2>Iniciar Sesión</h2>
-            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+            <form [formGroup]="formulario" (ngSubmit)="onSubmit()" autocomplete="off">
                 <div class="mb-3">
                     <label for="nombreUsuario" class="form-label">Nombre de Usuario:</label>
-                    <input type="text" class="form-control" id="nombreUsuario" formControlName="nombreUsuario" required>
+                    <input type="text" class="form-control" id="nombreUsuario" formControlName="nombreUsuario" required autocomplete="off">
+                    <div *ngIf="formulario.get('nombreUsuario')?.hasError('required') && formulario.get('nombreUsuario')?.touched"
+                        [ngClass]="{'error-message': formulario.get('nombreUsuario')?.hasError('required') && formulario.get('nombreUsuario')?.touched}">
+                        * El nombre de usuario es obligatorio.
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Contraseña:</label>
-                    <input type="password" class="form-control" id="password" formControlName="password" required>
+                    <input type="password" class="form-control" id="password" formControlName="password" required autocomplete="off">
+                    <div *ngIf="formulario.get('password')?.hasError('required') && formulario.get('password')?.touched"
+                        [ngClass]="{'error-message': formulario.get('password')?.hasError('required') && formulario.get('password')?.touched}">
+                        * La contraseña es obligatorio.
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary mt-3">Iniciar Sesión</button>
+                <button type="submit" class="btn btn-primary mt-3" (click)="marcarCamposTocados()">Iniciar Sesión</button>
             </form>
             <hr>
             <p>¿No tienes una cuenta? <button class="btn btn-link" (click)="goToRegister()">Regístrate</button></p>

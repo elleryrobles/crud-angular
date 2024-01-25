@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 
@@ -15,11 +15,11 @@ export class LoginComponent {
 
   formulario: FormGroup;
 
-  constructor() {
-    this.formulario = new FormGroup({
-      nombreUsuario: new FormControl(),
-      password: new FormControl(),
-    })
+  constructor(private fb: FormBuilder) {
+    this.formulario = this.fb.group({
+      nombreUsuario: ['', Validators.required],
+      password: ['', Validators.required]
+    });
   }
 
   onSubmit() {
@@ -34,6 +34,10 @@ export class LoginComponent {
         }
       );
     }
+  }
+
+  marcarCamposTocados() {
+    this.formulario.markAllAsTouched();
   }
 
   goToRegister() {
