@@ -1,10 +1,16 @@
 import { Component, inject } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-register',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule
+  ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -13,12 +19,25 @@ export class RegisterComponent {
   router = inject(Router);
   userService = inject(UserService);
 
-  mostrarAlerta: boolean = false;
+  roles: any = {
+    1: 'Administrador',
+    2: 'Usuario'
+  };
+
   formulario: FormGroup;
+  mostrarAlerta: boolean = false;
 
   constructor(
     private fb: FormBuilder
   ) {
+    this.formulario = this.fb.group({
+      nombre: ['', Validators.required],
+      nombreUsuario: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+      roles: this.fb.array([])
+    });
+
     this.formulario = new FormGroup({
       nombre: new FormControl(),
       nombreUsuario: new FormControl(),
@@ -50,6 +69,10 @@ export class RegisterComponent {
     }
   }
 
+  marcarCamposTocados() {
+    this.formulario.markAllAsTouched();
+  }
+
   goToLogin() {
     this.router.navigate(['/login']);
   }
@@ -60,5 +83,4 @@ export class RegisterComponent {
       this.mostrarAlerta = false;
     }, 3000);
   }
-  
 }
