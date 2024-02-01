@@ -16,7 +16,7 @@
                     <input type="password" class="form-control" id="password" formControlName="password" required autocomplete="off">
                     <div *ngIf="formulario.get('password')?.hasError('required') && formulario.get('password')?.touched"
                         [ngClass]="{'error-message': formulario.get('password')?.hasError('required') && formulario.get('password')?.touched}">
-                        * La contraseña es obligatorio.
+                        * La contraseña es obligatoria.
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary mt-3" (click)="marcarCamposTocados()">Iniciar Sesión</button>
