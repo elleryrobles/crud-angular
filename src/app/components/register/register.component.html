@@ -1,39 +1,88 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <h2>Formulario de Registro</h2>
-            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
-                <div class="mb-3">
-                    <label for="nombre" class="form-label">Nombre:</label>
-                    <input type="text" class="form-control" id="nombre" formControlName="nombre" required>
+<div class="relative flex flex-col justify-center min-h-screen overflow-hidden">
+    <div
+        class="w-full p-6 m-auto bg-white border-t border-purple-600 rounded shadow-lg shadow-purple-800/50 lg:max-w-md">
+        <h1 class="text-3xl font-semibold text-center text-purple-700">Formulario de Registro</h1>
+
+        <form class="mt-6" [formGroup]="formulario" (ngSubmit)="onSubmit()" autocomplete="off">
+            <div>
+                <label for="nombre" class="block text-sm text-gray-800">Nombre</label>
+                <input type="nombre" id="nombre" formControlName="nombre" required autocomplete="off"
+                    class="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40">
+                <p *ngIf="formulario.get('nombre')?.hasError('required') && formulario.get('nombre')?.touched"
+                    class="text-red-500 text-xs">
+                    * El nombre es obligatorio.
+                </p>
+            </div>
+            <div class="mt-4">
+                <label for="nombreUsuario" class="block text-sm text-gray-800">Nombre de Usuario</label>
+                <input type="nombreUsuario" id="nombreUsuario" formControlName="nombreUsuario" required
+                    autocomplete="off"
+                    class="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40">
+                <p *ngIf="formulario.get('nombreUsuario')?.hasError('required') && formulario.get('nombreUsuario')?.touched"
+                    class="text-red-500 text-xs">
+                    * El nombre de usuario es obligatorio.
+                </p>
+            </div>
+            <div class="mt-4">
+                <label for="email" class="block text-sm text-gray-800">Correo electrónico</label>
+                <input type="email" id="email" formControlName="email" required autocomplete="off"
+                    class="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40">
+                <p *ngIf="formulario.get('email')?.hasError('required') && formulario.get('email')?.touched"
+                    class="text-red-500 text-xs">
+                    * El correo electróico es obligatorio.
+                </p>
+            </div>
+            <div class="mt-4">
+                <label for="password" class="block text-sm text-gray-800">Contraseña</label>
+                <input type="password" id="password" formControlName="password" required autocomplete="off"
+                    class="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40">
+                <p *ngIf="formulario.get('password')?.hasError('required') && formulario.get('password')?.touched"
+                    class="text-red-500 text-xs">
+                    * La contraseña es obligatoria.
+                </p>
+            </div>
+            <div class="mt-4">
+                <label class="block text-sm text-gray-800">Roles:</label>
+                <div class="form-check" *ngFor="let rol of [1, 2]">
+                    <input type="checkbox" class="mr-2 leading-tight" id="rol{{ rol }}"
+                        [checked]="formulario.get('roles')?.value?.includes(rol)" (change)="agregarRol(rol)">
+                    <label class="text-sm" for="rol{{ rol }}">{{ roles[rol] }}</label>
                 </div>
-                <div class="mb-3">
-                    <label for="nombreUsuario" class="form-label">Nombre de Usuario:</label>
-                    <input type="text" class="form-control" id="nombreUsuario" formControlName="nombreUsuario" required>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Correo Electrónico:</label>
-                    <input type="email" class="form-control" id="email" formControlName="email" required>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Contraseña:</label>
-                    <input type="password" class="form-control" id="password" formControlName="password" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Roles:</label>
-                    <div class="form-check" *ngFor="let rol of [1, 2]">
-                        <input type="checkbox" class="form-check-input" id="rol{{ rol }}"
-                            [checked]="formulario.get('roles')?.value?.includes(rol)" (change)="agregarRol(rol)">
-                        <label class="form-check-label" for="rol{{ rol }}">Rol {{ rol }}</label>
-                    </div>
-                </div>
-                <button class="mb-3" type="submit" class="btn btn-primary">Registrar</button>
-                <div class="mb-3" *ngIf="mostrarAlerta" class="alert alert-success" role="alert">
-                    Usuario registrado con éxito.
-                </div>
-            </form>
-            <hr>
-            <p>¿Ya tienes una cuenta? <button class="btn btn-link" (click)="goToLogin()">Inicia Sesión</button></p>
-        </div>
+            </div>
+            <div class="mt-6">
+                <button (click)="marcarCamposTocados()"
+                    class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
+                    Registrar
+                </button>
+            </div>
+            <div class="mt-4 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">¡Error! </strong>
+                <span class="block sm:inline">Algo ha ocurrido.</span>
+                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                    <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20">
+                        <title>Close</title>
+                        <path
+                            d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+                    </svg>
+                </span>
+            </div>
+            <div class="mt-4 border border-teal-400 text-teal-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">¡Exito! </strong>
+                <span class="block sm:inline">Operación realida.</span>
+                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                    <svg class="fill-current h-6 w-6 text-teal-500" role="button" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20">
+                        <title>Close</title>
+                        <path
+                            d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+                    </svg>
+                </span>
+            </div>
+
+        </form>
+        <p class="mt-8 text-xs font-light text-center text-gray-700">¿Ya tienes una cuenta?
+            <button class="font-medium text-purple-600 hover:underline" (click)="goToLogin()">Inicia Sesión</button>
+        </p>
     </div>
 </div>

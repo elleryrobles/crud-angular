@@ -1,28 +1,39 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <h2>Iniciar Sesión</h2>
-            <form [formGroup]="formulario" (ngSubmit)="onSubmit()" autocomplete="off">
-                <div class="mb-3">
-                    <label for="nombreUsuario" class="form-label">Nombre de Usuario:</label>
-                    <input type="text" class="form-control" id="nombreUsuario" formControlName="nombreUsuario" required autocomplete="off">
-                    <div *ngIf="formulario.get('nombreUsuario')?.hasError('required') && formulario.get('nombreUsuario')?.touched"
-                        [ngClass]="{'error-message': formulario.get('nombreUsuario')?.hasError('required') && formulario.get('nombreUsuario')?.touched}">
-                        * El nombre de usuario es obligatorio.
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Contraseña:</label>
-                    <input type="password" class="form-control" id="password" formControlName="password" required autocomplete="off">
-                    <div *ngIf="formulario.get('password')?.hasError('required') && formulario.get('password')?.touched"
-                        [ngClass]="{'error-message': formulario.get('password')?.hasError('required') && formulario.get('password')?.touched}">
+<div class="relative flex flex-col justify-center min-h-screen overflow-hidden">
+    <div
+        class="w-full p-6 m-auto bg-white border-t border-purple-600 rounded shadow-lg shadow-purple-800/50 lg:max-w-md">
+        <h1 class="text-3xl font-semibold text-center text-purple-700">Crud Usuarios</h1>
+
+        <form class="mt-6" [formGroup]="formulario" (ngSubmit)="onSubmit()" autocomplete="off">
+            <div>
+                <label for="nombreUsuario" class="block text-sm text-gray-800">Nombre de Usuario</label>
+                <input type="nombreUsuario" id="nombreUsuario" formControlName="nombreUsuario" required
+                    autocomplete="off"
+                    class="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40">
+                <p *ngIf="formulario.get('nombreUsuario')?.hasError('required') && formulario.get('nombreUsuario')?.touched"
+                    class="text-red-500 text-xs">
+                    * El nombre de usuario es obligatorio.
+                </p>
+            </div>
+            <div class="mt-4">
+                <div>
+                    <label for="password" class="block text-sm text-gray-800">Contraseña</label>
+                    <input type="password" id="password" formControlName="password" required autocomplete="off"
+                        class="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40">
+                    <p *ngIf="formulario.get('password')?.hasError('required') && formulario.get('password')?.touched"
+                        class="text-red-500 text-xs">
                         * La contraseña es obligatoria.
-                    </div>
+                    </p>
                 </div>
-                <button type="submit" class="btn btn-primary mt-3" (click)="marcarCamposTocados()">Iniciar Sesión</button>
-            </form>
-            <hr>
-            <p>¿No tienes una cuenta? <button class="btn btn-link" (click)="goToRegister()">Regístrate</button></p>
-        </div>
+                <div class="mt-6">
+                    <button (click)="marcarCamposTocados()"
+                        class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
+                        Iniciar Sesión
+                    </button>
+                </div>
+            </div>
+        </form>
+        <p class="mt-8 text-xs font-light text-center text-gray-700">¿No tienes una cuenta?
+            <button class="font-medium text-purple-600 hover:underline" (click)="goToRegister()">Regístrate</button>
+        </p>
     </div>
 </div>
