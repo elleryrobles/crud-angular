@@ -28,4 +28,8 @@ export class UserService {
   getUsers(): Observable<any> {
     return this.httpClient.get<any>(`${this.baseUrl}/lista`);
   }
+
+  isLogged(): boolean {
+    return localStorage.getItem('token_crud') ? true : false;
+  }
 }

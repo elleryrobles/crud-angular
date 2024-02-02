@@ -1,4 +1,50 @@
-<div class="relative flex flex-col justify-center min-h-screen overflow-hidden">
+<!--div class="bg-gradient-to-tr from-fuchsia-300 to-sky-500"-->
+<section id="login" class="p-4 flex flex-col justify-center min-h-screen max-w-md mx-auto">
+    <div class="shadow-xl p-10 bg-white max-w-xl rounded">
+        <!-- <div class="flex items-center justify-center font-black m-3 mb-12">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mr-3 text-red-600 animate-pulse" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+        </svg>
+      <h1 class="tracking-wide text-3xl text-gray-900">Buy Me a Laptop</h1>
+      </div> -->
+        <h1 class="text-3xl font-semibold text-center text-purple-700">Canpus - CRM</h1>
+        <form class="mt-6" [formGroup]="formulario" (ngSubmit)="onSubmit()" autocomplete="off">
+            <div>
+                <label for="nombreUsuario" class="block text-sm text-gray-800">Nombre de Usuario</label>
+                <input type="nombreUsuario" id="nombreUsuario" formControlName="nombreUsuario" required
+                    autocomplete="off"
+                    class="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40">
+                <p *ngIf="formulario.get('nombreUsuario')?.hasError('required') && formulario.get('nombreUsuario')?.touched"
+                    class="text-red-500 text-xs">
+                    * El nombre de usuario es obligatorio.
+                </p>
+            </div>
+            <div class="mt-4">
+                <div>
+                    <label for="password" class="block text-sm text-gray-800">Contraseña</label>
+                    <input type="password" id="password" formControlName="password" required autocomplete="off"
+                        class="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40">
+                    <p *ngIf="formulario.get('password')?.hasError('required') && formulario.get('password')?.touched"
+                        class="text-red-500 text-xs">
+                        * La contraseña es obligatoria.
+                    </p>
+                </div>
+                <div class="mt-6">
+                    <button (click)="marcarCamposTocados()"
+                        class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
+                        Iniciar Sesión
+                    </button>
+                </div>
+            </div>
+        </form>
+        <p class="mt-8 text-xs font-light text-center text-gray-700">¿No tienes una cuenta?
+            <button class="font-medium text-purple-600 hover:underline" (click)="goToRegister()">Regístrate</button>
+        </p>
+    </div>
+</section>
+<!--/div-->
+
+<!-- <div class="relative flex flex-col justify-center min-h-screen overflow-hidden">
     <div
         class="w-full p-6 m-auto bg-white border-t border-purple-600 rounded shadow-lg shadow-purple-800/50 lg:max-w-md">
         <h1 class="text-3xl font-semibold text-center text-purple-700">Crud Usuarios</h1>
@@ -36,4 +82,4 @@
             <button class="font-medium text-purple-600 hover:underline" (click)="goToRegister()">Regístrate</button>
         </p>
     </div>
-</div>
+</div> -->

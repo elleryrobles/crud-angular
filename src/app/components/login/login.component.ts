@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { Input, Ripple, initTE, } from "tw-elements";
 
 
 @Component({
@@ -27,6 +28,10 @@ export class LoginComponent {
       nombreUsuario: ['', Validators.required],
       password: ['', Validators.required]
     });
+  }
+
+  ngOnInit(): void {
+    initTE({ Input, Ripple });
   }
 
   onSubmit() {
