@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, HostBinding, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
