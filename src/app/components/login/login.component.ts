@@ -1,4 +1,4 @@
-import { Component, HostBinding, computed, inject, signal } from '@angular/core';
+import { Component, HostBinding, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -18,12 +18,24 @@ import { Input, Ripple, initTE, } from "tw-elements";
 })
 export class LoginComponent {
 
+  darkMode = signal<boolean>(
+    JSON.parse(window.localStorage.getItem('darkMode') ?? 'false')
+  );
+
+  @HostBinding('class.dark') get mode() {
+    return this.darkMode();
+  }
+
   router = inject(Router);
   userService = inject(UserService);
 
   formulario: FormGroup;
 
   constructor(private fb: FormBuilder) {
+    effect(() => {
+      window.localStorage.setItem('darkMode', JSON.stringify(this.darkMode()));
+    });
+
     this.formulario = this.fb.group({
       nombreUsuario: ['', Validators.required],
       password: ['', Validators.required]

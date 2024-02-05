@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, HostBinding, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,8 +16,17 @@ import { UserService } from '../../services/user.service';
 })
 export class RegisterComponent {
 
+  darkMode = signal<boolean>(
+    JSON.parse(window.localStorage.getItem('darkMode') ?? 'false')
+  );
+
+  @HostBinding('class.dark') get mode() {
+    return this.darkMode();
+  }
+
   router = inject(Router);
   userService = inject(UserService);
+  fb = inject(FormBuilder);
 
   roles: any = {
     1: 'Administrador',
@@ -27,9 +36,11 @@ export class RegisterComponent {
   formulario: FormGroup;
   mostrarAlerta: boolean = false;
 
-  constructor(
-    private fb: FormBuilder
-  ) {
+  constructor() {
+    effect(() => {
+      window.localStorage.setItem('darkMode', JSON.stringify(this.darkMode()));
+    });
+    
     this.formulario = this.fb.group({
       nombre: ['', Validators.required],
       nombreUsuario: ['', Validators.required],
