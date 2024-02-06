@@ -3,29 +3,25 @@ import { CommonModule } from '@angular/common';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { ThemeService } from '../../services/theme.service';
+import { ThemeToggleComponent } from "../theme-toggle/theme-toggle.component";
 
 @Component({
-  selector: 'app-register',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule
-  ],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+    selector: 'app-register',
+    standalone: true,
+    templateUrl: './register.component.html',
+    styleUrl: './register.component.css',
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        ThemeToggleComponent
+    ]
 })
 export class RegisterComponent {
 
-  darkMode = signal<boolean>(
-    JSON.parse(window.localStorage.getItem('darkMode') ?? 'false')
-  );
-
-  @HostBinding('class.dark') get mode() {
-    return this.darkMode();
-  }
-
-  router = inject(Router);
+  themeService = inject(ThemeService);
   userService = inject(UserService);
+  router = inject(Router);
   fb = inject(FormBuilder);
 
   roles: any = {
@@ -37,10 +33,6 @@ export class RegisterComponent {
   mostrarAlerta: boolean = false;
 
   constructor() {
-    effect(() => {
-      window.localStorage.setItem('darkMode', JSON.stringify(this.darkMode()));
-    });
-    
     this.formulario = this.fb.group({
       nombre: ['', Validators.required],
       nombreUsuario: ['', Validators.required],

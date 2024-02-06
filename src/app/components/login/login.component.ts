@@ -4,38 +4,31 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { Input, Ripple, initTE, } from "tw-elements";
+import { ThemeToggleComponent } from "../theme-toggle/theme-toggle.component";
+import { ThemeService } from '../../services/theme.service';
 
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule
-  ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+    selector: 'app-login',
+    standalone: true,
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.css',
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        ThemeToggleComponent
+    ]
 })
 export class LoginComponent {
 
-  darkMode = signal<boolean>(
-    JSON.parse(window.localStorage.getItem('darkMode') ?? 'false')
-  );
-
-  @HostBinding('class.dark') get mode() {
-    return this.darkMode();
-  }
-
-  router = inject(Router);
+  themeService = inject(ThemeService);
   userService = inject(UserService);
+  router = inject(Router);
+  fb = inject(FormBuilder);
 
   formulario: FormGroup;
 
-  constructor(private fb: FormBuilder) {
-    effect(() => {
-      window.localStorage.setItem('darkMode', JSON.stringify(this.darkMode()));
-    });
-
+  constructor() {
     this.formulario = this.fb.group({
       nombreUsuario: ['', Validators.required],
       password: ['', Validators.required]

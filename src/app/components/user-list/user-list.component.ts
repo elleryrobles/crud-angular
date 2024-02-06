@@ -2,16 +2,20 @@ import { Component, inject } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { Sidenav, Collapse, Dropdown, initTE } from "tw-elements";
+import { ThemeToggleComponent } from "../theme-toggle/theme-toggle.component";
+import { ThemeService } from '../../services/theme.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-user-list',
-  standalone: true,
-  imports: [],
-  templateUrl: './user-list.component.html',
-  styleUrl: './user-list.component.css'
+    selector: 'app-user-list',
+    standalone: true,
+    templateUrl: './user-list.component.html',
+    styleUrl: './user-list.component.css',
+    imports: [CommonModule, ThemeToggleComponent]
 })
 export class UserListComponent {
 
+  themeService = inject(ThemeService);
   userService = inject(UserService);
   router = inject(Router);
 

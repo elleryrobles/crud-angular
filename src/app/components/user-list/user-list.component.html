@@ -1,3 +1,4 @@
+<div [class.dark]="themeService.darkMode$ | async">
 <div class="flex h-screen bg-slate-200 dark:bg-slate-700">
   <div class="flex-1 flex flex-col overflow-hidden">
     <header>
@@ -90,6 +91,7 @@
                 }
               </button> -->
               <!-- Cart Icon -->
+              <app-theme-toggle></app-theme-toggle>
               <a class="mr-4 text-neutral-600 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
                 href="#">
                 <span class="[&>svg]:w-5">
@@ -573,6 +575,7 @@
       <!-- Rightbar -->
     </div>
   </div>
+</div>
 </div>
 
 <style>

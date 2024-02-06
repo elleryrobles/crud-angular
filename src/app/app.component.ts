@@ -12,7 +12,7 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent {
   title = 'crud-angular';
   // darkMode = signal<boolean>(
-  //   JSON.parse(window.localStorage.getItem('darkMode') ?? 'false')
+  //   JSON.parse(window.localStorage.getItem('darkMode2') ?? 'false')
   // );
 
   // @HostBinding('class.dark') get mode() {
