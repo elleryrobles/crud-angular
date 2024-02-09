@@ -1,20 +1,21 @@
-import { Component, HostBinding, computed, inject, signal } from '@angular/core';
-import { UserService } from '../../services/user.service';
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Sidenav, Collapse, Dropdown, initTE } from "tw-elements";
+import { ThemeToggleComponent } from "../theme-toggle/theme-toggle.component";
+import { UserService } from '../../services/user.service';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
-  selector: 'app-invoice-list',
-  standalone: true,
-  imports: [],
-  templateUrl: './invoice-list.component.html',
-  styleUrl: './invoice-list.component.css'
+    selector: 'app-invoice-list',
+    standalone: true,
+    templateUrl: './invoice-list.component.html',
+    styleUrl: './invoice-list.component.css',
+    imports: [CommonModule, ThemeToggleComponent]
 })
 export class InvoiceListComponent {
 
-  private darkMode = signal<boolean>(false);
-  protected readonly darkMode$ = computed(() => this.darkMode());
-
+  themeService = inject(ThemeService);
   userService = inject(UserService);
   router = inject(Router);
 
@@ -28,14 +29,6 @@ export class InvoiceListComponent {
   ngOnInit(): void {
     initTE({ Sidenav, Collapse, Dropdown, initTE });
     this.loadUsers();
-  }
-
-  @HostBinding('class.dark') get mode() {
-    return this.darkMode();
-  }
-
-  setDarkMode() {
-    this.darkMode.set(!this.darkMode());
   }
 
   loadUsers(): void {

@@ -27,6 +27,8 @@ export class LoginComponent {
   fb = inject(FormBuilder);
 
   formulario: FormGroup;
+  alertEnable: boolean = false;
+  alert: any;
 
   constructor() {
     this.formulario = this.fb.group({
@@ -47,7 +49,13 @@ export class LoginComponent {
           this.router.navigate(['/user-list']);
         },
         error => {
-          console.error('Error al loguear usuario:', error);
+          console.error(error.error.status.toUpperCase(), error.error);
+          this.alertEnable = true;
+            this.alert = error.error;
+            setTimeout(() => {
+              this.alertEnable = false;
+            }, 5000);
+          
         }
       );
     }
