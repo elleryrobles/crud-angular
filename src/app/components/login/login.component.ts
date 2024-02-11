@@ -46,7 +46,7 @@ export class LoginComponent {
       this.userService.postLogin(this.formulario.value).subscribe(
         response => {
           localStorage.setItem('token_crud', response.token);
-          this.router.navigate(['/user-list']);
+          this.router.navigate(['/home/user-list']);
         },
         error => {
           console.error(error.error.status.toUpperCase(), error.error);
