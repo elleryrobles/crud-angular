@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Sidenav, Collapse, Dropdown, initTE } from "tw-elements";
 import { ThemeToggleComponent } from "../theme-toggle/theme-toggle.component";
-import { UserService } from '../../services/user.service';
-import { ThemeService } from '../../services/theme.service';
+import { UserService } from '../../core/services/user.service';
+import { ThemeService } from '../../core/services/theme.service';
 
 @Component({
     selector: 'app-invoice-list',
@@ -50,7 +50,7 @@ export class InvoiceListComponent {
   }
 
   onClickLogout() {
-    localStorage.removeItem('token_crud');
+    sessionStorage.removeItem('token_crud');
     this.router.navigate(['/login']);
   }
 

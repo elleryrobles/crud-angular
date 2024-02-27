@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThemeToggleComponent } from "../../../components/theme-toggle/theme-toggle.component";
 import { Router } from '@angular/router';
-import { ThemeService } from '../../../services/theme.service';
+import { ThemeService } from '../../../core/services/theme.service';
 import { Collapse, Dropdown, initTE } from "tw-elements";
 
 
@@ -23,7 +23,7 @@ export class HeaderComponent {
   }
   
   onClickLogout() {
-    localStorage.removeItem('token_crud');
+    sessionStorage.removeItem('token_crud');
     this.router.navigate(['/login']);
   }
 

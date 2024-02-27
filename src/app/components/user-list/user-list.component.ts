@@ -2,8 +2,8 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ThemeToggleComponent } from "../theme-toggle/theme-toggle.component";
-import { UserService } from '../../services/user.service';
-import { ThemeService } from '../../services/theme.service';
+import { UserService } from '../../core/services/user.service';
+import { ThemeService } from '../../core/services/theme.service';
 
 @Component({
   selector: 'app-user-list',
@@ -48,7 +48,7 @@ export class User2ListComponent {
   }
 
   onClickLogout() {
-    localStorage.removeItem('token_crud');
+    sessionStorage.removeItem('token_crud');
     this.router.navigate(['/login']);
   }
 

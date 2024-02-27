@@ -1,9 +1,9 @@
 import { HttpInterceptorFn } from '@angular/common/http';
-import { UserService } from '../services/user.service';
 import { inject } from '@angular/core';
+import { UserService } from '../services/user.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-
+  
   let clonedReq = req;
 
   if (inject(UserService).isLogged()) {

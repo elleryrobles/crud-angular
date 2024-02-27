@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../core/services/user.service';
 import { Router } from '@angular/router';
 import { Sidenav, Dropdown, Ripple, initTE } from "tw-elements";
 
@@ -74,7 +74,7 @@ export class ItemListComponent {
   }
 
   onClickLogout() {
-    localStorage.removeItem('token_crud');
+    sessionStorage.removeItem('token_crud');
     this.router.navigate(['/login']);
   }
 }
