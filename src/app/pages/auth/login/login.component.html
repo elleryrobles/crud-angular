@@ -18,7 +18,7 @@
                                 Usuario</label>
                             <input type="nombreUsuario" id="nombreUsuario" formControlName="nombreUsuario" required
                                 autocomplete="off"
-                                class="w-full mt-3 py-2 px-3 h-10 bg-white dark:bg-slate-800 dark:text-slate-200 rounded-lg outline-none border border-gray-300 dark:border-gray-800 focus:border-gray-600 dark:focus:border-green-600 focus:ring-0">
+                                class="w-full mt-3 py-2 px-3 h-10 bg-white dark:bg-slate-800 dark:text-slate-200 rounded-lg outline-none border border-gray-300 dark:border-gray-800 focus:border-green-600 dark:focus:border-green-600 focus:ring-0">
                             <p *ngIf="formulario.get('nombreUsuario')?.hasError('required') && formulario.get('nombreUsuario')?.touched"
                                 class="text-red-400 text-sm">
                                 * El nombre de usuario es obligatorio.
@@ -30,7 +30,7 @@
                                     class="text-lg text-neutral-700 dark:text-gray-300">Contraseña</label>
                                 <input type="password" id="password" formControlName="password" required
                                     autocomplete="off"
-                                    class="w-full mt-3 py-2 px-3 h-10 bg-white dark:bg-slate-800 dark:text-slate-200 rounded-lg outline-none border border-gray-300 dark:border-gray-800 focus:border-gray-600 dark:focus:border-green-600 focus:ring-0">
+                                    class="w-full mt-3 py-2 px-3 h-10 bg-white dark:bg-slate-800 dark:text-slate-200 rounded-lg outline-none border border-gray-300 dark:border-gray-800 focus:border-green-600 dark:focus:border-green-600 focus:ring-0">
                                 <p *ngIf="formulario.get('password')?.hasError('required') && formulario.get('password')?.touched"
                                     class="text-red-400 text-sm">
                                     * La contraseña es obligatoria.
