@@ -4,25 +4,25 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { Input, Ripple, initTE, } from "tw-elements";
 import { ThemeService } from '../../../core/services/theme.service';
-import { UserService } from '../../../core/services/user.service';
 import { ThemeToggleComponent } from '../../../components/theme-toggle/theme-toggle.component';
+import { AuthService } from '../../../core/services/auth.service';
 
 
 @Component({
-    selector: 'app-login',
-    standalone: true,
-    templateUrl: './login.component.html',
-    styleUrl: './login.component.css',
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        ThemeToggleComponent
-    ]
+  selector: 'app-login',
+  standalone: true,
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.css',
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    ThemeToggleComponent
+  ]
 })
 export class LoginComponent {
 
   themeService = inject(ThemeService);
-  userService = inject(UserService);
+  authService = inject(AuthService);
   router = inject(Router);
   fb = inject(FormBuilder);
 
@@ -43,21 +43,19 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.formulario.valid) {
-      this.userService.postLogin(this.formulario.value).subscribe(
-        response => {
-          localStorage.setItem('token_crud', response.token);
+      this.authService.postLogin(this.formulario.value).subscribe({
+        next: (resp) => {
+          sessionStorage.setItem('token_crud', resp.token);
           this.router.navigate(['/user-list']);
         },
-        error => {
-          console.error(error.error.status.toUpperCase(), error.error);
+        error: (err) => {
           this.alertEnable = true;
-            this.alert = error.error;
-            setTimeout(() => {
-              this.alertEnable = false;
-            }, 5000);
-          
+          this.alert = err.error;
+          setTimeout(() => {
+            this.alertEnable = false;
+          }, 5000);
         }
-      );
+      });
     }
   }
 
@@ -68,5 +66,5 @@ export class LoginComponent {
   goToRegister() {
     this.router.navigate(['/registro']);
   }
-  
+
 }

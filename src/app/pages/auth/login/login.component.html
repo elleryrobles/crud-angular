@@ -43,7 +43,7 @@
                                 </button>
                             </div>
                             <div *ngIf="alertEnable">
-                                @if (alert.status == 'error') {
+                                @if (alert.status) {
                                 <!-- <div class="mt-4 bg-success/25 text-center text-success text-sm rounded-md p-4"
                                     role="alert">
                                     <span class="font-bold">{{ alert.message }}.</span>
