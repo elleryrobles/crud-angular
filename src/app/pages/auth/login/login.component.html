@@ -1,6 +1,17 @@
 <div [class.dark]="themeService.darkMode$ | async">
-    <div class="min-h-screen min-w-full bg-slate-200 dark:bg-slate-600">
-        <div id="login" class="flex flex-col justify-center min-h-screen max-w-md mx-auto">
+    <div class="min-h-screen flex items-center justify-center bg-slate-200 dark:bg-slate-600">
+        <!-- Background Image -->
+        <!-- <div class="absolute inset-0 z-0">
+            <img src="https://source.unsplash.com/random/1920x1080" alt=""
+                class="w-full h-full object-cover filter blur-lg brightness-50">
+            <img src="https://source.unsplash.com/random/1920x1080" alt=""
+                class="w-full h-full object-cover filter brightness-30">
+            <img src="../../../../assets/fondoPantalla1.jpg" alt=""
+                class="w-full h-full object-cover blur-xs brightness-20">
+        </div> -->
+        
+        <!-- Login Form -->
+        <div id="login" class="flex flex-col z-10 justify-center min-h-screen max-w-md mx-auto">
             <div
                 class="card shadow-xl max-w-xl rounded-lg bg-slate-50 dark:bg-slate-700 shadow-gray-800 dark:shadow-gray-800">
                 <div class="!px-5 !py-6 card-body">
@@ -21,7 +32,7 @@
                                 class="w-full mt-3 py-2 px-3 h-10 bg-gray-100 dark:bg-slate-800 dark:text-slate-200 rounded-lg outline-none border border-gray-300 dark:border-gray-800 focus:border-green-600 dark:focus:border-green-600 focus:ring-0">
                             <p *ngIf="formulario.get('nombreUsuario')?.hasError('required') && formulario.get('nombreUsuario')?.touched"
                                 class="font-bold text-danger text-sm px-2">
-                                El nombre de usuario es obligatorio.
+                                    El nombre de usuario es obligatorio.
                             </p>
                         </div>
                         <div class="mt-4">

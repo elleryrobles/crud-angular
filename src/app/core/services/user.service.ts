@@ -31,7 +31,7 @@ export class UserService {
   // }
 
   getUsers(): Observable<any> {
-    return this.httpClient.get<any>(`${this.authUrl}/lista`);
+    return this.httpClient.get<any>(`${this.authUrl}/list`);
   }
 
   // isLogged(): boolean {
